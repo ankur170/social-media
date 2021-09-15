@@ -41,7 +41,7 @@ const EditProfile = ({createCurrentProfile, getCurrentProfile, history, profile:
         website: isLoading || !profile.website ? '' : profile.website,
         location: isLoading || !profile.location ? '' : profile.location,
         status: isLoading || !profile.status ? '' : profile.status,
-        skill: isLoading || !profile.skill ? '' : profile.skill.split(','),
+        skill: isLoading || !profile.skill ? '' : ( profile.skill + '').split(','),
         bio: isLoading || !profile.bio ? '' : profile.bio,
         githubUsername: isLoading || !profile.githubUsername ? '' : profile.githubUsername,
         facebook: isLoading || !profile.facebook ? '' : profile.facebook,

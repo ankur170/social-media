@@ -14,7 +14,7 @@ postsRouter.post(
     body('text').not().isEmpty().withMessage('text is required')
     ], 
     async(req,res)=>{
-    console.log('req body  is', req.body)
+    //console.log('req body  is', req.body)
     const errors = validationResult(req)
     if(!errors.isEmpty()){
         return res.status(400).json({errors:errors.array()})

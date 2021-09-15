@@ -67,7 +67,7 @@ async(req,res)=>{
     if(location)  profileFields.location = location;
     if(bio)  profileFields.bio = bio;
     if(githubUsername)  profileFields.githubUsername = githubUsername
-    if(skill)  profileFields.skill = skill.split(',').map((oneSkill)=> oneSkill.trim())
+    if(skill)  profileFields.skill = (skill+'').split(',').map((oneSkill)=> oneSkill.trim())
 
     //build social profile object
     profileFields.socialMedia = {}
@@ -290,7 +290,7 @@ profilesRouter.put(
             {$set:{education:profile.education}},
             {new:true}
         )
-        console.log('updated education is',updatedEducation)
+        //console.log('updated education is',updatedEducation)
         res.send(updatedEducation)
     }
     catch(err){
