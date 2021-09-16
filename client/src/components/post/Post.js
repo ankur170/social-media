@@ -10,9 +10,11 @@ import { Link } from 'react-router-dom'
 
 const Post = ({post:{post, isLoading}, getPostByPostId, match}) => {
     useEffect(()=> getPostByPostId(match.params.post_id),[getPostByPostId, match.params.post_id])
-    return ( post === null && isLoading ? <Spinner /> :<>
+    
+    return ( post === null || isLoading  ? <Spinner /> :<>
         <Link to = '/posts' className = 'btn'> Back To Post </Link>
         <PostItem displaySection = {false} post = {post} />
+        {console.log('post before comment form is ', post)}
         <CommentForm post_id = {post._id}/>
         {post.comment.map((comm)=> 
         <CommentItem key = {comm._id} post_id= {post._id} comment = {comm}/> )}

@@ -23,16 +23,17 @@ export const getAllPosts = ()=> async (dispatch)=>{
 
 //Get  Post BY POST ID
 export const getPostByPostId = (post_id)=> async (dispatch)=>{
-    console.log('getpostbyid isrunning postId is', post_id)
+    
     try{
         const res = await axios.get(`/api/posts/${post_id}`)
-        console.log('getallpost res is', res.data)
         dispatch({
             type: GET_POST,
             payload: res.data
         })
     }
     catch(err){
+        const errs = err.response.data.errors
+        errs.forEach(error => dispatch(setAlert(error.msg,'danger')));
         //console.log('err is',err.response)
         dispatch({
             type: POSTS_ERROR,

@@ -64,13 +64,13 @@ postsRouter.get('/:id',[authMiddleware],async(req,res)=>{
         const idPost = await Post.findById(id)
         //console.log('idpost is',idPost)
         if(!idPost){
-            return res.status(400).json({errors:{msg: 'Post Not Found'}})
+            return res.status(400).json({errors:[{msg: 'Post Not Found'}]})
         }
         res.json(idPost)
     }
     catch(err){
         if(err.kind == "ObjectId"){
-            return res.status(400).json({errors:{msg: 'Post Not Found'}})
+            return res.status(400).json({errors:[{msg: 'Post Not Found'}]})
         }
         console.error(err.message)
         res.status(500).send('Server Error')
@@ -84,7 +84,7 @@ postsRouter.delete('/:id', [authMiddleware], async(req,res)=>{
     try{
         const idPost = await Post.findById(req.params.id)
         if(!idPost){
-            return res.status(400).json({errors:{msg: 'Post Not Found'}}) 
+            return res.status(400).json({errors:[{msg: 'Post Not Found'}]}) 
         }
         //console.log('idPost is ',idPost)
         //console.log(`typeof idpost.user is ${typeof(idPost.user)} and type of req.user.id is ${typeof(req.user.id)}`)
@@ -96,7 +96,7 @@ postsRouter.delete('/:id', [authMiddleware], async(req,res)=>{
     }
     catch(err){
         if(err.kind == "ObjectId"){
-            return res.status(400).json({errors:{msg: 'Post Not Found'}})
+            return res.status(400).json({errors:[{msg: 'Post Not Found'}]})
         }  
         console.error(err.message)
         res.status(500).send('Server Error')
@@ -110,7 +110,7 @@ postsRouter.put('/like/:id',[authMiddleware], async(req,res)=>{
     try{
         const idPost = await Post.findById(req.params.id)
         if(!idPost){
-            return res.status(400).json({errors:{msg: 'Post Not Found'}})
+            return res.status(400).json({errors:[{msg: 'Post Not Found'}]})
         }
 //check if already liked
         const checkLikeBefore = idPost.like.filter((item)=> item.user.toString() === req.user.id)
@@ -124,7 +124,7 @@ postsRouter.put('/like/:id',[authMiddleware], async(req,res)=>{
     }
     catch(err){
         if(err.kind == "ObjectId"){
-            return res.status(400).json({errors:{msg: 'Post Not Found'}})
+            return res.status(400).json({errors:[{msg: 'Post Not Found'}]})
         } 
         console.error(err.message)
         res.status(500).send('Server Error')
@@ -137,7 +137,7 @@ postsRouter.put('/unlike/:id',[authMiddleware], async(req,res)=>{
     try{
         const idPost = await Post.findById(req.params.id)
         if(!idPost){
-            return res.status(400).json({errors:{msg: 'Post Not Found'}})
+            return res.status(400).json({errors:[{msg: 'Post Not Found'}]})
         }
 //check if already liked
         const checkLikeBefore = idPost.like.filter((item)=> item.user.toString() === req.user.id)
@@ -151,7 +151,7 @@ postsRouter.put('/unlike/:id',[authMiddleware], async(req,res)=>{
     }
     catch(err){
         if(err.kind == "ObjectId"){
-            return res.status(400).json({errors:{msg: 'Post Not Found'}})
+            return res.status(400).json({errors:[{msg: 'Post Not Found'}]})
         } 
         console.error(err.message)
         res.status(500).send('Server Error')
@@ -176,7 +176,7 @@ postsRouter.post(
         const user = await User.findById(req.user.id);
         const post = await Post.findById(req.params.id)
         if(!post){
-            return res.status(400).json({errors:{msg: 'Post Not Found'}})
+            return res.status(400).json({errors:[{msg: 'Post Not Found'}]})
         }
         const newCommentObject =  {
             text : req.body.text,
@@ -192,7 +192,7 @@ postsRouter.post(
     catch(err){
         console.error(err.message)
         if(err.kind == "ObjectId"){
-            return res.status(400).json({errors:{msg: 'Post Not Found'}})
+            return res.status(400).json({errors:[{msg: 'Post Not Found'}]})
         } 
         res.status(500).json('Server Error') 
     }
@@ -206,7 +206,7 @@ postsRouter.delete('/comment/:id/:comment_id',[authMiddleware],async(req,res)=>{
     try{
         const post = await Post.findById(req.params.id)
         if(!post){
-            return res.status(400).json({errors:{msg: 'Post Not Found'}})
+            return res.status(400).json({errors:[{msg: 'Post Not Found'}]})
         }
         //check comment exist
         const idComment = post.comment.find((item)=> (item.id) === req.params.comment_id)

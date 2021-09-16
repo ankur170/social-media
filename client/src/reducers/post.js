@@ -38,7 +38,8 @@ const post = (state = initialState, action)=>{
             return{
                 ...state,
                 error: payload,
-                isLoading:false
+                isLoading:false,
+                post: null
             }
         case UPDATE_LIKE:
             return{
