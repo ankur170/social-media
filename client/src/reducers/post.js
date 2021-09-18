@@ -1,4 +1,4 @@
-import { ADD_POST, DELETE_POST, GET_POSTS, GET_POST, POSTS_ERROR ,UPDATE_LIKE, ADD_COMMENT, REMOVE_COMMENT} from "../actions/types";
+import { ADD_POST, DELETE_POST, GET_POSTS, GET_POST, POSTS_ERROR ,UPDATE_LIKE, ADD_COMMENT, REMOVE_COMMENT, CLEAR_POST} from "../actions/types";
 
 const initialState = {
     posts : [],
@@ -40,6 +40,13 @@ const post = (state = initialState, action)=>{
                 error: payload,
                 isLoading:false,
                 post: null
+            }
+        case CLEAR_POST:
+            return{
+                ...state,
+                posts: [],
+                post:null,
+                isLoading:false
             }
         case UPDATE_LIKE:
             return{
