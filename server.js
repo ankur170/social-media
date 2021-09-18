@@ -26,7 +26,7 @@ app.use('/api/profiles',profilesRouter)
 
 //serve static files in production
 
-if(process.env.NODE_ENV !== 'production'){
+if(process.env.NODE_ENV === 'production'){
     //set static folder
     app.use(express.static(path.join(__dirname,'client', 'build')))
     app.get('*',(req,res)=>{
